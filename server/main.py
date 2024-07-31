@@ -75,7 +75,6 @@ async def websocket_endpoint(websocket: WebSocket, client_id: Optional[str] = No
     if client_id is None:
         await websocket.close(code=4001)
         return
-    # save this client into server memory
     await manager.connect(websocket, client_id)
     try:
         while True:
@@ -83,7 +82,8 @@ async def websocket_endpoint(websocket: WebSocket, client_id: Optional[str] = No
             event = data["event"]
             print(event)
             if event == "chat":
-                await process_text(data["messages"])
+                async for response in process_text(data["messages"]):
+                    await manager.send_personal_message(response, websocket)
 
     except WebSocketDisconnect:
         print("Disconnecting...", client_id)

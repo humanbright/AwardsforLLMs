@@ -343,7 +343,7 @@ async def process_text(prev_messages):
             function_to_call = available_functions[function_name]
             function_args = tool_call.function.arguments
             function_response = function_to_call(
-                function_args
+                json.loads(function_args)
             )
             yield {"event": "search_result",  "content": function_response}
             messages.append(
@@ -359,3 +359,5 @@ async def process_text(prev_messages):
             messages=messages,
         )  # get a new response from the model where it can see the function response
         yield {"event": "chat", "content": second_response.choices[0].message.content}
+    else:
+        yield {"event": "chat", "content": response_message.content}
