@@ -1,1 +1,1 @@
-# AwardsforLLMs
+# AwardsForLLMs
