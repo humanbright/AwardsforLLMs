@@ -3,10 +3,14 @@
 import Image from "next/image";
 import Search from "./components/search";
 import { useState } from "react";
+import { DropdownMenuCheckboxes } from "./components/ui/dropdown";
+
+
 
 export default function Home() {
   const [active, setActive] = useState(false);
   const [expired, setExpired] = useState(false);
+
 
   return (
     <div className=" h-screen p-12">
