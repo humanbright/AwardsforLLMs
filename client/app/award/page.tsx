@@ -1,10 +1,12 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
+import Chat from "../components/chat";
 
 const Award = () => {
     return (
         <div className="flex flex-col gap-5 h-screen p-12">
+            <Chat />
             <Image src={"../logo.svg"} alt="NSF Logo" height={80} width={200} />
             <Link href={"/"} className="underline text-[#005EA2]"> Back to Search</Link>
             <p className="italic">Award #2212721</p>
