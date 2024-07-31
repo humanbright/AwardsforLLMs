@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 import uvicorn
 from socket_manager import manager
+from llm import process_text, search_awards
 
 import json
 import requests
@@ -20,18 +21,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-def search_awards(params):
-    clean = {}
-    for key in params.keys():
-        if params[key] != "":
-            clean[key] = params[key]
-    r = requests.get('http://api.nsf.gov/services/v1/awards.json', params=clean)
-    response = r.json()
-    if isinstance(response, dict):
-        return json.dumps(response)
-    else:
-        return json.dumps({"error": "Unexpected response format", "data": response})
 
 
 @app.get("/")
@@ -93,7 +82,8 @@ async def websocket_endpoint(websocket: WebSocket, client_id: Optional[str] = No
             data = await websocket.receive_json()
             event = data["event"]
             print(event)
-            
+            if event == "chat":
+                await process_text(data["messages"])
 
     except WebSocketDisconnect:
         print("Disconnecting...", client_id)
