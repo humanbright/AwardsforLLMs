@@ -89,6 +89,9 @@ export default function Chat() {
 
     webClient.on('update', (update) => {
       console.log('update', update)
+      if (update.transcript) {
+        setMessages(update.transcript)
+      }
     })
 
     return () => {
