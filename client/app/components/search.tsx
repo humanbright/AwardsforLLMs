@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DropdownMenuCheckboxes } from "./ui/dropdown";
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 export enum SearchMethod {
   SIMPLE = "Simple",
@@ -14,6 +14,7 @@ const Search: React.FC = () => {
   );
 
   const [query, setQuery] = useState<string>("");
+  const router = useRouter();
 
   return (
     <div className="flex items-center justify-center text-xl mt-8 w-full">
@@ -27,7 +28,7 @@ const Search: React.FC = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <button onClick={async () => {
-        await redirect(`$/search/${query}`)
+        await router.push(`/search/${query}`)
       }} className="bg-[#005EA2] px-8 py-3 rounded-lg text-white">
         SEARCH
       </button>
