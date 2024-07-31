@@ -149,15 +149,13 @@ async def handle_webhook(request: Request):
 async def handle_register_call(request: Request):
     try:
         post_data = await request.json()
-        call_response = retell.call.register(
-            agent_id=post_data["agent_id"],
-            audio_websocket_protocol="web",
-            audio_encoding="s16le",
-            sample_rate=post_data[
-                "sample_rate"
-            ],  # Sample rate has to be 8000 for Twilio
+        call_response = retell.call.create_web_call(
+            agent_id=post_data["agentId"],
         )
         print(f"Call response: {call_response}")
+        return JSONResponse(status_code=200, content={
+            "access_token": call_response.access_token,
+        })
     except Exception as err:
         print(f"Error in register call: {err}")
         return JSONResponse(
