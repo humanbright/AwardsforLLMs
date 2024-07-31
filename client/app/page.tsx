@@ -4,6 +4,7 @@ import Image from "next/image";
 import Search from "./components/search";
 import { useState } from "react";
 import { DropdownMenuCheckboxes } from "./components/ui/dropdown";
+import Chat from "./components/chat";
 
 export default function Home() {
   const [active, setActive] = useState(false);
@@ -12,6 +13,7 @@ export default function Home() {
 
   return (
     <div className=" h-screen p-12">
+      <Chat />
       <Image src={"/logo.svg"} alt="NSF Logo" height={80} width={300} />
       <div className="flex items-center justify-center mt-32 flex-col">
         <h1 className=" font-bold text-7xl">Search Awards</h1>
