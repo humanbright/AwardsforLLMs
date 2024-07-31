@@ -75,11 +75,11 @@ export default function Chat() {
   return (
     <div className="flex flex-col absolute bottom-0 right-0 m-3">
       { chatOpen ? (
-        <div className='max-h-[90vh] overflow-scroll'>
+        <div className='max-h-[90vh]'>
           <div className='bg-red-700 p-5 text-white font-bold rounded-xl w-min ml-auto' onClick={chatOpenHandler}>
             X
           </div>
-          <div className="flex-1 overflow-y-auto p-6 max-w-4xl mx-auto w-full bg-gray-100 min-h-60">
+          <div className="flex-1 overflow-y-scroll max-h-[60vh] p-6 max-w-4xl mx-auto w-full bg-gray-100 min-h-60">
             {messages.map((message, index) => (
               <div
                 key={index}
