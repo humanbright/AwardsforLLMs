@@ -45,12 +45,6 @@ export const DropdownMenuCheckboxes: React.FC<{
         >
           Advanced
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={searchMethod === SearchMethod.AI}
-          onCheckedChange={() => setSearchMethod(SearchMethod.AI)}
-        >
-          AI
-        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
