@@ -23,6 +23,11 @@ class ConnectionManager:
     async def send_personal_message(self, data: dict, websocket: WebSocket):
         await websocket.send_json(data)
 
+    # sends data to a specific client by client_id
+    async def send_to_client(self, data: dict, client_id: str):
+        if client_id in self.active_connections:
+            await self.active_connections[client_id].send_json(data)
+
     # shows data to all clients with active connections to the ws
     async def broadcast(self, data: dict):
         for connection in self.active_connections.values():
